@@ -1,0 +1,22 @@
+# Compiled binaries and build output
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go test binaries, profiles, and coverage output
+*.test
+*.out
+coverage.txt
+coverage.html
+
+# Go workspace files
+go.work
+go.work.sum
+
+# Dependency directory (vendored deps are not committed here)
+/vendor/
+
+# macOS / editor cruft
+.DS_Store
