@@ -194,7 +194,7 @@ The rule is:
 2. When a manifest is signed, the `signature` member **MUST be the last member of the top-level object** — i.e. `signature` is the final key before the closing `}` of the root object. (This is the one formatting constraint signing imposes; unsigned manifests are unconstrained.)
 3. The **signing payload P** is **M with the entire `signature` member textually removed**, defined exactly as: starting from **M**, delete the byte range that begins at the comma separating the `signature` member from the preceding member and ends immediately before the root object's closing `}`. The result **P** is itself a well-formed JSON object (the same manifest without `signature`).
 4. **In both the signed and the unsigned form, P ends at the root object's closing `}`.** Bytes after that closing `}` — trailing whitespace such as a final newline, which is all JSON permits there — are **excluded** from the signing payload. For an unsigned document (the producer's sign-first step, where P is the whole document) this means P runs up to and including the root `}`, not to the raw end of the file; the signed form's excision in rule 3 already ends at the root `}`. This symmetry is what keeps sign-then-append verifiable: a publisher that signs a newline-terminated file and then appends the `signature` member produces a manifest whose excised payload is byte-identical to the payload it signed.
-5. **P** is the payload that is signed and verified. The JWS is **detached** (RFC 7515 §A.5): the JWS payload segment is empty on the wire; the signing input is `ASCII(BASE64URL(protected_header))` `.` `BASE64URL(P)`.
+5. **P** is the payload that is signed and verified. The JWS is **detached** (RFC 7515, Appendix F): the JWS payload segment is empty on the wire; the signing input is `ASCII(BASE64URL(protected_header))` `.` `BASE64URL(P)`.
 
 Because **P** is obtained by deleting a byte range from **M** — never by parsing and re-serializing — the verifier reconstructs the identical payload the signer used with byte-for-byte fidelity, regardless of language, JSON library, key ordering of the *other* members, number formatting, or whitespace. The publisher signs first (over the object without `signature`), then appends the `signature` member as the last key; the verifier excises it back out.
 
@@ -273,7 +273,7 @@ Free-text fields (`organization.description`, `also_known_as`, `display.categori
 
 ### 7.8 Identity spoofing and lookalikes
 
-A manifest's `legal_name`/`logo`/`website` can impersonate a well-known charity. The `legal_name` is a **display candidate only**; the consumer's displayed identity MUST be the authoritatively-resolved one, and any mismatch between the manifest's claimed name and the resolved IRS record SHOULD be surfaced or SHOULD cause the manifest to be treated as display-only. Domain possession is not identity: serving a manifest at `charity-example.org` does not establish that the origin is the organization behind a given EIN ([§5.3a](#53a-identity-binding-normative)).
+A manifest's `legal_name`/`logo`/`website` can impersonate a well-known charity. The `legal_name` is a **display candidate only**; the consumer's displayed identity MUST be the authoritatively-resolved one, and any mismatch between the manifest's claimed name and the resolved IRS record SHOULD be surfaced or SHOULD cause the manifest to be treated as display-only. Domain possession is not identity: serving a manifest at `charity.example` does not establish that the origin is the organization behind a given EIN ([§5.3a](#53a-identity-binding-normative)).
 
 ### 7.9 Fetch-time hardening
 
@@ -372,7 +372,7 @@ See `examples/valid.donate.json`. It exercises display metadata, contact info, a
 
 ### A.3 Hostile manifest (rejected / sanitized)
 
-See `examples/hostile.donate.json`. It attempts every forbidden move: prompt-injection payloads embedded in `legal_name` and `description`; self-asserted `tax_deductible`, `is_qualified_501c3`, `good_standing`, `pub78_verified`, `receipt_text`, `legal_disclosure`; a `self_hosted` method with an exfiltration `self_hosted_url` plus rogue `action_url` / `payto` / `confirmed_recipient` / `skip_verification` fields; and `x_extensions` keys (`givmo:catalog_accepted`, `givmo:eligibility_override`, `authorization`) trying to spoof catalog membership and carry a bearer token.
+See `examples/hostile.donate.json`. It attempts every forbidden move: prompt-injection payloads embedded in `legal_name` and `description`; self-asserted `tax_deductible`, `deductibility_statement`, `is_qualified_501c3`, `good_standing`, `pub78_verified`, `receipt_text`, `legal_disclosure`; a `self_hosted` method with an exfiltration `self_hosted_url` plus rogue `action_url` / `payto` / `confirmed_recipient` / `skip_verification` fields; and `x_extensions` keys (`givmo:catalog_accepted`, `givmo:eligibility_override`, `authorization`) trying to spoof catalog membership and carry a bearer token.
 
 Against this manifest a conforming consumer:
 
@@ -399,7 +399,7 @@ This fixture asserts authority via **values** under innocuous keys and via `x_ex
 
 - RFC 2119 / RFC 8174 — Requirement-level keywords.
 - RFC 8615 — Well-Known Uniform Resource Identifiers.
-- RFC 7515 — JSON Web Signature (JWS) — detached form (§A.5).
+- RFC 7515 — JSON Web Signature (JWS) — detached form (Appendix F).
 - RFC 3339 — Date and Time on the Internet: Timestamps.
 - ISO 3166-1 — Country codes (alpha-2).
 - BCP 47 — Tags for Identifying Languages.
