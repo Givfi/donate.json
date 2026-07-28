@@ -41,9 +41,11 @@ the specification.
 
 ## Status
 
-**Version 1.0.** The IANA well-known-URI **provisional registration is in progress** (see
-[`SPEC.md` §10](SPEC.md#10-iana-considerations)). The document is written in the style of an
-IETF RFC but is not itself an RFC. Within the `1.x` line, changes are additive and
+**Version 1.0.** IANA well-known-URI registration is being **pursued through the IETF standards
+process** (an Internet-Draft and a DISPATCH proposal are in preparation; an initial provisional
+request was declined under the registry's policy on generic URI suffixes — see
+[`SPEC.md` §10](SPEC.md#10-iana-considerations) for the full status). The document is written in
+the style of an IETF RFC but is not itself an RFC. Within the `1.x` line, changes are additive and
 backward-compatible (new OPTIONAL fields only).
 
 ## Quickstart

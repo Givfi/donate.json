@@ -1,7 +1,7 @@
 # The `donate.json` Manifest Specification
 
 **Version:** 1.0
-**Status:** v1.0. The IANA well-known-URI provisional registration ([§10](#10-iana-considerations)) is in progress.
+**Status:** v1.0. IANA well-known-URI registration is being pursued through the IETF standards process ([§10](#10-iana-considerations)).
 **Well-known location:** `/.well-known/donate.json`
 **License:** Apache-2.0 (see `LICENSE`)
 **Editor:** Givmo Charitable Fund (`givmocharitable.org`) · maintained by Givfi, Inc. engineering
@@ -14,7 +14,7 @@
 
 `donate.json` is the **discovery layer** for agentic charitable giving. An automated agent that encounters a domain can fetch its `donate.json` to learn (a) the organization's self-described identity, including a US EIN used only as a *lookup key*, and (b) that the organization consents to being surfaced as a donation target. It is deliberately **not** a payment protocol, an authorization mechanism, or a source of legal or tax statements.
 
-This document specifies the file location, the JSON structure, a normative security model that treats the manifest as untrusted attacker-writable input, an optional detached-signature integrity mechanism, versioning, and a provisional IANA well-known-URI registration template. A machine-readable JSON Schema (`schema/donate.schema.json`) and a reference parser (`parser/`) accompany this specification.
+This document specifies the file location, the JSON structure, a normative security model that treats the manifest as untrusted attacker-writable input, an optional detached-signature integrity mechanism, versioning, and an IANA well-known-URI registration template. A machine-readable JSON Schema (`schema/donate.schema.json`) and a reference parser (`parser/`) accompany this specification.
 
 The specification is open; any site may publish a conforming manifest. Being *listed in, or accepted by, any particular donation platform's catalog* is a separate, curated decision that this specification does not govern (see [§12](#12-relationship-to-consuming-platforms-non-normative)).
 
@@ -22,7 +22,7 @@ The specification is open; any site may publish a conforming manifest. Being *li
 
 ## Status of This Memo
 
-This document is **version 1.0** of the `donate.json` manifest specification. It is **not** an IETF RFC and has **not** been submitted to the IETF; it is published independently under the governance described in [§10](#10-iana-considerations). The document is deliberately structured in the style of an RFC to ease a possible future submission. The IANA well-known-URI registration in [§10](#10-iana-considerations) is a **provisional** registration whose submission is in progress.
+This document is **version 1.0** of the `donate.json` manifest specification. It is **not** an IETF RFC; it is published independently under the governance described in [§10](#10-iana-considerations). The document is deliberately structured in the style of an RFC because an IETF submission is the intended path: IANA registration of the well-known URI is being pursued through the IETF standards process (an Internet-Draft and a DISPATCH proposal are in preparation — see [§10](#10-iana-considerations) for status). In the interim, `/.well-known/donate.json` operates as an unregistered well-known URI.
 
 ---
 
@@ -316,7 +316,7 @@ In **both** modes the guarantee is the same and it is the **consumer-behavior gu
 
 ## 10. IANA Considerations
 
-> **Provisional registration — submission in progress.** The following is the provisional registration for the IANA "Well-Known URIs" registry (RFC 8615). Its submission is in progress; this section will be updated to reflect the registration's status once IANA has processed it.
+> **Registration status (updated 2026-07-28).** An initial provisional registration request (submitted 2026-07-24) was declined by the registry's designated expert under current registry policy: generic ("bare-word") URI suffixes are accepted only when sourced from an IESG-recognised standards organisation, and a single-owner GitHub repository is not a suitable specification reference. Rather than adopt a vendor-prefixed suffix — which would defeat the manifest's purpose as a platform-neutral discovery location — the editor is pursuing the path the reviewer suggested: an Internet-Draft and a proposal through the IETF DISPATCH process. Until a registration is granted, `/.well-known/donate.json` operates as an unregistered well-known URI. The template below is retained as the registration this specification requests; this section will be updated as the registration's status changes.
 
 Registration template (per RFC 8615 §3.1):
 
